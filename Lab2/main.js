@@ -1,31 +1,27 @@
-// Get all images
-const sliderImages = document.querySelector('#slider-content').querySelectorAll('img');
-
-// Hide all images but the first
-sliderImages.forEach((image, index) => {
-  if (index !== 0) {
-    image.classList.add('hidden');
-  }
-});
-
-
 function displayNextImage() {
-  const currentImageIndex = sliderImages.findIndex((image) => !image.classList.contains('hidden')); 
-  const nextImageIndex = (currentImageIndex + 1) % sliderImages.length;
-  if (nextImageIndex === sliderImages.length) {
-    nextImageIndex = 0;
-  }
-  sliderImages[currentImageIndex].classList.add('hidden');
-  sliderImages[nextImageIndex].classList.remove('hidden');
+  const sliderContent = document.querySelector('#slider-content');
+  const sliderImages = sliderContent.querySelectorAll('img');
+  
+  const currentImage = sliderContent.querySelector('img:not(.hidden)');
+  const currentIndex = Array.from(sliderImages).indexOf(currentImage);
+  
+  const nextIndex = (currentIndex + 1) % sliderImages.length;
+  const nextImage = sliderImages[nextIndex];
+  
+  currentImage.classList.add('hidden');
+  nextImage.classList.remove('hidden');
 }
 
-
 function displayPreviousImage() {
-  const currentImageIndex = sliderImages.findIndex((image) => !image.classList.contains('hidden'));
-  const previousImageIndex = (currentImageIndex - 1 + sliderImages.length) % sliderImages.length;
-  if (previousImageIndex === -1) {
-    previousImageIndex = sliderImages.length - 1;
-  }
-  sliderImages[currentImageIndex].classList.add('hidden');
-  sliderImages[previousImageIndex].classList.remove('hidden');
+  const sliderContent = document.querySelector('#slider-content');
+  const sliderImages = sliderContent.querySelectorAll('img');
+  
+  const currentImage = sliderContent.querySelector('img:not(.hidden)');
+  const currentIndex = Array.from(sliderImages).indexOf(currentImage);
+  
+  const previousIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
+  const previousImage = sliderImages[previousIndex];
+  
+  currentImage.classList.add('hidden');
+  previousImage.classList.remove('hidden');
 }
